@@ -1,23 +1,40 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <el-container>
+      <el-header>
+        <Header></Header>
+      </el-header>
+      <el-container>
+        <el-aside>
+          <Aside></Aside>
+        </el-aside>
+        <el-main>Main</el-main>
+      </el-container>
+      <el-footer>Footer</el-footer>
+    </el-container>
   </div>
 </template>
 
 <script>
+import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
+import Aside from './components/Aside/Aside'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Header,
+    Footer,
+    Aside
+  }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .el-header {
+    padding: 0 0;
+    background-color:#409EFF;
+  }
+  body {
+    margin: 0 0;
+  }
 </style>
