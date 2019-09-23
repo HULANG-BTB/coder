@@ -1,6 +1,6 @@
 <template>
     <div>
-      Problem
+      问题
     </div>
 </template>
 

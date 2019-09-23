@@ -10,7 +10,7 @@
         </el-aside>
         <el-container>
           <el-main>
-            
+            <router-view></router-view>
           </el-main>
           <el-footer>
             <Footer></Footer>
@@ -22,17 +22,17 @@
 </template>
 
 <script>
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import Aside from "./components/Aside/Aside";
+import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
+import Aside from './components/Aside/Aside'
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Header,
     Aside,
     Footer
   }
-};
+}
 </script>
 
 <style>
@@ -46,6 +46,7 @@ body {
   background-color: #409eff;
 }
 .el-aside {
+  background-color: #545c64;
 }
 .el-footer {
   padding: 0;

@@ -1,6 +1,6 @@
 <template>
     <div>
-      测试
+      竞赛
     </div>
 </template>
 

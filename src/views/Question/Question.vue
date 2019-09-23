@@ -1,6 +1,6 @@
 <template>
     <div>
-      Question
+      问答
     </div>
 </template>
 

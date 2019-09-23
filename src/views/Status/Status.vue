@@ -1,6 +1,6 @@
 <template>
     <div>
-      Status
+      状态
     </div>
 </template>
 

@@ -6,12 +6,20 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/Home',
-      component: Home => require(['@/views/Home/Home'], Home)
+      path: '/Environment',
+      component: Environment => require(['@/views/Environment/Environment'], Environment)
     },
     {
       path: '/Question',
       component: Question => require(['@/views/Question/Question'], Question)
+    },
+    {
+      path: '/Category',
+      component: Category => require(['@/views/Category/Category'], Category)
+    },
+    {
+      path: '/Rank',
+      component: Rank => require(['@/views/Rank/Rank'], Rank)
     },
     {
       path: '/Contest',
@@ -31,7 +39,7 @@ export default new Router({
     },
     {
       path: '/',
-      redirect: '/Home'
+      redirect: '/Environment'
     }
   ]
 })

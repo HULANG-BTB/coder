@@ -1,6 +1,6 @@
 <template>
     <div>
-      Profile
+      个人信息
     </div>
 </template>
 
