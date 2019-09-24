@@ -31,6 +31,10 @@ export default {
     Header,
     Aside,
     Footer
+  },
+  mounted () {
+  },
+  methods: {
   }
 }
 </script>
