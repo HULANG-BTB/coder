@@ -1,4 +1,7 @@
 export default {
+  categoryList: [],
+  statusList: [],
   problemList: [],
-  problemInfo: {}
+  problemInfo: {},
+  userInfo: {}
 }

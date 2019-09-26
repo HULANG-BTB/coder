@@ -4,7 +4,11 @@
 
 import {
   RECEIVE_PROBLEM_LIST,
-  RECEIVE_PROBLEM_INFO
+  RECEIVE_PROBLEM_INFO,
+  CLEAR_USER_INFO,
+  RECEIVE_CATEGORY_LIST,
+  RECEIVE_STATUS_LIST,
+  RECEIVE_USER_INFO
 } from './mutation-types'
 
 export default {
@@ -13,5 +17,17 @@ export default {
   },
   [RECEIVE_PROBLEM_INFO] (state, {problemInfo}) {
     state.problemInfo = problemInfo
+  },
+  [CLEAR_USER_INFO] (state, {problemInfo}) {
+    state.problemInfo = problemInfo
+  },
+  [RECEIVE_CATEGORY_LIST] (state, {categoryList}) {
+    state.categoryList = categoryList
+  },
+  [RECEIVE_STATUS_LIST] (state, {statusList}) {
+    state.statusList = statusList
+  },
+  [RECEIVE_USER_INFO] (state, {userInfo}) {
+    state.userInfo = userInfo
   }
 }

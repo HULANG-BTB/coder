@@ -1,15 +1,14 @@
 <template>
-    <div>
-      分类
-    </div>
+  <transition>
+    <router-view></router-view>
+  </transition>
 </template>
 
 <script>
 export default {
-
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>
