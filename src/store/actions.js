@@ -8,14 +8,18 @@ import {
   CLEAR_USER_INFO,
   RECEIVE_CATEGORY_LIST,
   RECEIVE_STATUS_LIST,
-  RECEIVE_USER_INFO
+  RECEIVE_USER_INFO,
+  RECEIVE_RANK_LIST,
+  RECEIVE_CONTEST_LIST
 } from './mutation-types'
 import {
   reqProblemList,
   reqProblemInfo,
   reqCategoryList,
   reqStatusList,
-  reqUserInfo
+  reqUserInfo,
+  reqRankList,
+  reqContestList
 } from '../api'
 
 export default {
@@ -73,6 +77,24 @@ export default {
     } else if (result.code === 0) {
       const userInfo = {}
       commit(RECEIVE_USER_INFO, {userInfo})
+    }
+  },
+  // 异步获取排行列表
+  async getRankList ({commit}, query) {
+    const result = await reqRankList(query)
+    if (result.code === 1) {
+      const rankList = result.data
+      commit(RECEIVE_RANK_LIST, {rankList})
+      // 提交一个mutation
+    }
+  },
+  // 异步获取测试列表
+  async getContestList ({commit}, query) {
+    const result = await reqContestList(query)
+    if (result.code === 1) {
+      const contestList = result.data
+      commit(RECEIVE_CONTEST_LIST, {contestList})
+      // 提交一个mutation
     }
   }
 }

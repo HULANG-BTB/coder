@@ -8,7 +8,9 @@ import {
   CLEAR_USER_INFO,
   RECEIVE_CATEGORY_LIST,
   RECEIVE_STATUS_LIST,
-  RECEIVE_USER_INFO
+  RECEIVE_USER_INFO,
+  RECEIVE_RANK_LIST,
+  RECEIVE_CONTEST_LIST
 } from './mutation-types'
 
 export default {
@@ -29,5 +31,11 @@ export default {
   },
   [RECEIVE_USER_INFO] (state, {userInfo}) {
     state.userInfo = userInfo
+  },
+  [RECEIVE_RANK_LIST] (state, {rankList}) {
+    state.rankList = rankList
+  },
+  [RECEIVE_CONTEST_LIST] (state, {contestList}) {
+    state.contestList = contestList
   }
 }

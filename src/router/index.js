@@ -47,11 +47,53 @@ export default new Router({
     },
     {
       path: '/Rank',
-      component: Rank => require(['@/views/Rank/Rank'], Rank)
+      component: Rank => require(['@/views/Rank/Rank'], Rank),
+      children: [
+        {
+          path: '/Rank/List',
+          name: 'RankList',
+          component: RankList => require(['@/views/Rank/List'], RankList),
+          query: {
+            page: 1,
+            limit: 15,
+            keyword: ''
+          }
+        },
+        {
+          path: '',
+          redirect: '/Rank/List',
+          query: {
+            page: 1,
+            limit: 15,
+            keyword: ''
+          }
+        }
+      ]
     },
     {
       path: '/Contest',
-      component: Contest => require(['@/views/Contest/Contest'], Contest)
+      component: Contest => require(['@/views/Contest/Contest'], Contest),
+      children: [
+        {
+          path: '/Contest/List',
+          name: 'ContestList',
+          component: ContestList => require(['@/views/Contest/List'], ContestList),
+          query: {
+            page: 1,
+            limit: 15,
+            keyword: ''
+          }
+        },
+        {
+          path: '',
+          redirect: '/Contest/List',
+          query: {
+            page: 1,
+            limit: 15,
+            keyword: ''
+          }
+        }
+      ]
     },
     {
       path: '/Problem',

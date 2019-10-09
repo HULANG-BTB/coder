@@ -77,14 +77,14 @@
           label="结果"
           width="160">
           <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.result }}</span>
+            <span style="margin-left: 10px" v-bind:style="{color: getResultStyle(scope.row.result)}">{{ scope.row.result }}</span>
           </template>
         </el-table-column>
         <el-table-column
           label="内存"
           width="130">
           <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.memory }} MB</span>
+            <span style="margin-left: 10px">{{ scope.row.memory }} KB</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -103,14 +103,14 @@
         <el-table-column
           label="代码长度">
           <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.code_length }} B</span>
+            <span style="margin-left: 10px">{{ scope.row.length }} B</span>
           </template>
         </el-table-column>
         <el-table-column
           label="提交时间"
           width="200">
           <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.in_date }}</span>
+            <span style="margin-left: 10px">{{ scope.row.create_time }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -186,6 +186,7 @@ export default {
     search () {
       this.page = 1
       const query = this.buildQuery()
+      this.$router.push({name: 'StatusList', query: query})
       this.getStatusList(query)
     },
     buildQuery () {
@@ -196,6 +197,28 @@ export default {
         user: this.user,
         language: this.language,
         result: this.result
+      }
+    },
+    getResultStyle (result) {
+      switch (result) {
+        case '正确':
+          return '#5cb85c'
+        case '格式错误':
+          return '#c9302c'
+        case '答案错误':
+          return '#c9302c'
+        case '时间超限':
+          return '#ec971f'
+        case '内存超限':
+          return '#ec971f'
+        case '输出超限':
+          return '#ec971f'
+        case '运行错误':
+          return '#ec971f'
+        case '编译错误':
+          return '#ec971f'
+        default :
+          return '#ec971f'
       }
     }
   }

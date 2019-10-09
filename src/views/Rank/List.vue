@@ -3,14 +3,8 @@
     <el-header :style="{height: 'initial'}">
       <el-row style="text-align: center;">
         <el-row>
-          <h1>题目列表</h1>
-          <el-input placeholder="请输入内容" v-model="keyword" class="input-with-select">
-            <el-select v-model="type" slot="prepend" placeholder="请选择">
-              <el-option label="题号" value="pid"></el-option>
-              <el-option label="标题" value="title"></el-option>
-              <el-option label="内容" value="description"></el-option>
-              <el-option label="分类" value="category"></el-option>
-            </el-select>
+          <h1>排行</h1>
+          <el-input placeholder="请输入用户名" v-model="keyword" class="input-with-select">
             <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
           </el-input>
         </el-row>
@@ -22,25 +16,33 @@
         style="width: 100%"
         border
         fit
-        @row-click="redirect"
       >
         <el-table-column
-          label="编号"
+          label="排名"
           width="100">
           <template slot-scope="scope">
             <span style="margin-left: 10px">{{ scope.row.id }}</span>
           </template>
         </el-table-column>
         <el-table-column
-          label="标题">
+          label="用户ID"
+          width="100">
           <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.title }}</span>
+            <span style="margin-left: 10px">{{ scope.row.id }}</span>
           </template>
         </el-table-column>
         <el-table-column
-          label="分类/来源">
+          label="用户名"
+        >
           <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.category }}</span>
+            <span style="margin-left: 10px">{{ scope.row.username }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="正确"
+          width="80">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.row.solved }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -51,10 +53,10 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="正确"
-          width="80">
+          label="比例"
+          width="140">
           <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.accepted }}</span>
+            <span style="margin-left: 10px">{{ scope.row.accepted/scope.row.submit }}</span>
           </template>
         </el-table-column>
       </el-table>
@@ -81,45 +83,42 @@ export default {
     return {
       page: parseInt(this.$route.query.page) || 1,
       limit: parseInt(this.$route.query.limit) || 10,
-      keyword: this.$route.query.keyword || '',
-      type: this.$route.query.type || 'description'
+      keyword: this.$route.query.keyword || ''
     }
   },
   computed: {
     tableData () {
-      return this.problemList.data
+      return this.rankList.data
     },
-    ...mapState(['problemList']),
+    ...mapState(['rankList']),
     total () {
-      return this.problemList.total
+      return this.rankList.total
     }
   },
   mounted () {
-    this.getProblemList(this)
+    const query = this.buildQuery()
+    this.getRankList(query)
   },
   methods: {
-    ...mapActions(['getProblemList']),
+    ...mapActions(['getRankList']),
     handlePageChange (data) {
       this.page = data
       const query = this.buildQuery()
-      this.$router.push({name: 'ProblemList', query: query})
-      this.getProblemList(query)
+      this.$router.push({name: 'RankList', query: query})
+      this.getRankList(query)
     },
     handleSizeChange (data) {
       this.limit = data
       const query = this.buildQuery()
-      this.$router.push({name: 'ProblemList', query: query})
-      this.getProblemList(query)
-    },
-    redirect (obj) {
-      this.$router.push({name: 'ProblemDetail', query: {id: obj.id}})
+      this.$router.push({name: 'RankList', query: query})
+      this.getRankList(query)
     },
     search () {
       if (this.type !== '') {
         this.page = 1
         const query = this.buildQuery()
-        this.$router.push({name: 'ProblemList', query: query})
-        this.getProblemList(query)
+        this.$router.push({name: 'RankList', query: query})
+        this.getRankList(query)
       }
     },
     buildQuery () {

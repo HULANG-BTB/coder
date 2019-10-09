@@ -1,12 +1,12 @@
 <template>
   <el-container v-loading="loading">
     <el-header :style="{height: 'initial'}">
-      <h2>{{ problemInfo.id + ' : ' +problemInfo.title }}</h2>
-      <h5>时间: {{ problemInfo.time_limit }} s 内存: {{ problemInfo.memory_limit }} MB</h5>
+      <h2>{{ problemInfo.pid + ' : ' +problemInfo.title }}</h2>
+      <h5>时间: {{ problemInfo.time }} s 内存: {{ problemInfo.memory }} MB</h5>
     </el-header>
     <el-main>
       <h3>题目描述</h3>
-      <p v-html="problemInfo.content"></p>
+      <p v-html="problemInfo.description"></p>
       <h3>输入格式</h3>
       <p v-html="problemInfo.input ? problemInfo.input : '无'"></p>
       <h3>输出格式</h3>

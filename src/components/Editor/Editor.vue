@@ -50,7 +50,7 @@ export default {
         }
       ],
       Editor: null,
-      backupValue: ''
+      code: ''
     }
   },
   props: {
@@ -99,56 +99,32 @@ export default {
           autoIndent: false, // 自动布局
           language: 'c', // 语言
           theme: 'vs', // 主题
-          value: this.backupValue // 内容
+          value: this.value // 内容
         }
       }
     }
   },
   mounted () {
-    // this.initEditor()
     this.initialize()
   },
   methods: {
     initialize () {
       let that = this
-      this.$refs.editor.innerHTML = ''
-      this.Editor = monaco.editor.create(this.$refs.editor, this.options)
-      this.Editor.onDidChangeModelContent(function (event) {
-        that.backupValue = that.Editor.getValue()
+      this.options.value = that.code
+      that.$refs.editor.innerHTML = ''
+      that.Editor = monaco.editor.create(this.$refs.editor, this.options)
+      that.Editor.onDidChangeModelContent(function (event) {
+        that.code = that.Editor.getValue()
+        that.$emit('input', {code: that.code, language: that.options.language})
       })
     },
     themeChange () {
       this.initialize()
     },
     languageChange () {
+      this.$emit('input', {code: this.code, language: this.options.language})
       this.initialize()
     }
-
-    // initEditor () {
-    //   let self = this
-    //   self.$refs.container.innerHTML = ''
-    //   self.monacoEditor = monaco.editor.create(self.$refs.container, {
-    //     value: self.codesCopy || self.codes,
-    //     language: self.language,
-    //     theme: self.theme, // vs, hc-black, or vs-dark
-    //     editorOptions: self.editorOptions
-    //   })
-    //   self.$emit('onMounted', self.monacoEditor)// 编辑器创建完成回调
-    //   self.monacoEditor.onDidChangeModelContent(function (event) { // 编辑器内容changge事件
-    //     self.codesCopy = self.monacoEditor.getValue()
-    //     self.$emit('onCodeChange', self.monacoEditor.getValue(), event)
-    //   })
-    //   // 编辑器随窗口自适应
-    //   window.addEventListener('resize', function () {
-    //     this.initEditor()
-    //   })
-    // },
-    // RunResult () {
-    //   console.log(this.monacoEditor.getValue())
-    // },
-    // themeChange (val) {
-    //   this.initEditor()
-    // }
   }
 }
 </script>
