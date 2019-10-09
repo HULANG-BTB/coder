@@ -1,0 +1,6 @@
+数据库转移
+问题表
+SELECT problem_id as pid, title,description,input,output,sample_input,sample_output,time_limit as time, memory_limit as memory, NULL as code ,hint, spj,source as category,UNIX_TIMESTAMP(in_date) as create_time, UNIX_TIMESTAMP(in_date) as update_time, 0 as submit,solved as accepted ,1 as status FROM `problem`
+ 
+测试表
+SELECT contest_id as cid,1 as uid, title, description,null as problem,UNIX_TIMESTAMP(start_time) as start_time,UNIX_TIMESTAMP(end_time) as end_time,private,`password`,type,UNIX_TIMESTAMP(start_time) as create_time, UNIX_TIMESTAMP(end_time) as update_time FROM `contest`
